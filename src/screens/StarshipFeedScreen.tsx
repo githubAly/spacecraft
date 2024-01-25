@@ -1,18 +1,13 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, View, FlatList, Image } from "react-native";
+import { SafeAreaView, StyleSheet, View, FlatList, Image, ActivityIndicator, Text } from "react-native";
 import { Card, Paragraph, Title } from "react-native-paper";
-import { default as data } from "../../api/data.json";
-
-interface Starship {
-  name: string;
-  model: string;
-  crew: string;
-  hyperdrive_rating: string;
-  cost_in_credits: string;
-}
+import { useStarships } from "../hooks/useStarships";
+ // Importing your custom hook
 
 export const StarshipFeedScreen = () => {
-  const renderItem = ({ item }: { item: Starship }) => (
+  const { data: starships, isLoading, error } = useStarships(); // Using the custom hook to fetch starship data
+
+  const renderItem = ({ item }: { item: any }) => (
     <FeedCard
       name={item.name}
       model={item.model}
@@ -28,7 +23,7 @@ export const StarshipFeedScreen = () => {
     crew,
     hyperdrive_rating,
     cost_in_credits,
-  }: Starship) => (
+  }: any) => (
     <Card style={styles.card}>
       <Card.Title title={name} />
       <Image source={{ uri: 'https://picsum.photos/seed/car/400/200' }} style={styles.image} />
@@ -41,16 +36,34 @@ export const StarshipFeedScreen = () => {
     </Card>
   );
 
+  if (isLoading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  if (error) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.errorContainer}>
+          <Text>Error fetching data</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.containerbis}>
-        <FlatList
-          data={data.results}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.name}
-          contentContainerStyle={{ paddingHorizontal: 20, marginTop: 20 }}
-        />
-      </View>
+      <FlatList
+        data={starships?.results} // Using the starships data fetched from the hook
+        renderItem={renderItem}
+        keyExtractor={(item) => item.name}
+        contentContainerStyle={{ paddingHorizontal: 20, marginTop: 20 }}
+      />
     </SafeAreaView>
   );
 };
@@ -59,8 +72,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  containerbis: {
+  loadingContainer: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   card: {
     marginVertical: 5,
