@@ -16,6 +16,7 @@ const Mdp = () => {
 };
 const styles = StyleSheet.create({
     input:{
+        marginTop: 50,
         width: '90%',
         marginBottom:30,
       }}

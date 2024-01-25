@@ -17,6 +17,7 @@ const Login = () => {
 const styles = StyleSheet.create({
     input:{
         width: '90%',
+        marginBottom:60,
       }}
 );
 export default Login;
