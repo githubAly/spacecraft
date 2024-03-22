@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Alert } from "react-native";
+import { View, Image, Alert, ScrollView } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 
 export const TermsScreen = () => {
@@ -10,12 +10,12 @@ export const TermsScreen = () => {
   }
 
   return (
-    <View>
+    <ScrollView>
       <Appbar.Header>
         <Appbar.BackAction onPress={goBack} />
         <Appbar.Content title="Terms and Conditions" />
       </Appbar.Header>
-      <View style={{ padding: 32 }}>
+      <ScrollView style={{ padding: 32 }}>
         <Text variant="bodyMedium" style={{ marginBottom: 24 }}>
           This Terms of Service, including all supplemental terms as amended
           from time to time, governs your use of the online game, service, or
@@ -102,7 +102,7 @@ export const TermsScreen = () => {
         />
 
         <Text style={{ marginBottom: 128 }}>May the force be with you</Text>
-      </View>
-    </View>
+      </ScrollView>
+    </ScrollView>
   );
 };

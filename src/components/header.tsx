@@ -1,6 +1,7 @@
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Text } from 'react-native-paper';
 
+var width = Dimensions.get('window').width;
 export default function Header() {
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -12,13 +13,16 @@ export default function Header() {
   
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: 'purple',
+      alignItems: 'center',
+      justifyContent: 'center',
       color: 'white',
       paddingTop: 50,
       paddingBottom: 30,
-      width: '100%',
+      width: width,
+      backgroundColor: 'purple',
     },
     titre: {
-      color: 'white',}
+      color: 'white',
+    }
   });
   

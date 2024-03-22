@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView  } from 'react-native';
+import { StyleSheet, ScrollView, Dimensions, TouchableOpacity  } from 'react-native';
 import { Text } from 'react-native-paper';
 import Login from '../components/login';
 import Mdp from '../components/mdp'
@@ -6,14 +6,20 @@ import Button_ok from '../components/button';
 import Header from '../components/header';
 
 
-export default function LoginScreen() {
+// var height = Dimensions.get('window').height;
+export default function LoginScreen({navigation}) {
+  function navigateToTerms() {
+    navigation.navigate('Terms');
+  }
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Header />
       <Login />
       <Mdp />
       <Button_ok />
-      <Text variant="bodySmall">By login you accept the Terms and Conditions</Text>
+      <TouchableOpacity onPress={navigateToTerms}> 
+      <Text> By login you accept the Terms and Conditions </Text> 
+      </TouchableOpacity>
     </ScrollView>
     
   );
@@ -21,7 +27,8 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
     container: {
       alignItems: 'center',
-      width: '100%',
+      justifyContent: 'center',
+     
     },
 });
   
