@@ -1,16 +1,21 @@
-import { StyleSheet, ScrollView, Dimensions, TouchableOpacity  } from 'react-native';
-import { Text } from 'react-native-paper';
+import { StyleSheet, ScrollView, Dimensions, TouchableOpacity, Text } from 'react-native';
+import { Text as PaperText } from 'react-native-paper';
 import Login from '../components/login';
-import Mdp from '../components/mdp'
+import Mdp from '../components/mdp';
 import Button_ok from '../components/button';
 import Header from '../components/header';
+import React from 'react';
 
 
-// var height = Dimensions.get('window').height;
 export default function LoginScreen({navigation}) {
   function navigateToTerms() {
     navigation.navigate('Terms');
   }
+
+  function navigateToStarshipFeedScreen(navigation) {
+    navigation.navigate('Starship');
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Header />
@@ -18,17 +23,15 @@ export default function LoginScreen({navigation}) {
       <Mdp />
       <Button_ok />
       <TouchableOpacity onPress={navigateToTerms}> 
-      <Text> By login you accept the Terms and Conditions </Text> 
+        <PaperText>By logging in, you accept the Terms and Conditions</PaperText> 
       </TouchableOpacity>
     </ScrollView>
-    
   );
 }
+
 const styles = StyleSheet.create({
     container: {
       alignItems: 'center',
       justifyContent: 'center',
-     
     },
 });
-  
